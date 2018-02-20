@@ -25,7 +25,7 @@ SECRET_KEY = 'x2j@ed5(ciz7y)0a)rega__1pik8&4(v)kmq^umf5lxj1g$i6z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['211.159.187.146',]
+ALLOWED_HOSTS = ['211.159.187.146','www.yangyafang.top','yangyafang.top',]
 
 
 # Application definition
@@ -116,7 +116,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
