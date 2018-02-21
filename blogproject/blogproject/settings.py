@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x2j@ed5(ciz7y)0a)rega__1pik8&4(v)kmq^umf5lxj1g$i6z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['211.159.187.146','www.yangyafang.top','yangyafang.top',]
+ALLOWED_HOSTS = ['127.0.0.1','211.159.187.146','www.yangyafang.top','yangyafang.top',]
 
 
 # Application definition
@@ -127,3 +127,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIR = [
     os.path.join(BASE_DIR,'blog/static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
