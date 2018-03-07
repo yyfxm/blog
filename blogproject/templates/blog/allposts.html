@@ -9,7 +9,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	    <!-- css -->
-		<link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">	
 		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 		<link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
 	    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
@@ -21,7 +21,7 @@
 	    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
 	</head>
 
-	<body id="page">
+	<body>
 		<div class="container">	
 			<header id="site-header">
 				<div class="row">
@@ -65,24 +65,33 @@
 			<div class="container">
 				<div class="row">
 					<main class="col-md-12">
-						<h1 class="page-title">About Me</h1>
-						<article class="post">
+					{% for post in post_list %}
+						<link rel="stylesheet" href="">
+						<article class="post post-{{ post.pk }}">
+							<header class="entry-header">
+								<h1 class="entry-title">
+									<a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+								</h1>
+								<div class="entry-meta">
+									<span class="post-category"><a href="#">{{ post.category.name }}</a></span>
+			
+									<span class="post-date"><a href="#"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ post.create_time }}</time></a></span>
+			
+									<span class="post-author"><a href="#">{{ post.author }}</a></span>
+			
+									<span class="comments-link"><a href="">{{ post.comment_set.count }} 评论</a></span>
+								</div>
+							</header>
 							<div class="entry-content clearfix">
-								<figure class="img-responsive-center">
-									<img class="img-responsive" src="{% static 'blog/img/me.jpg' %}" alt="Developer Image">
-								</figure>
-								<p>普通211大三狗，女，信息安全专业，在考研与找工作之间徘徊的技术渣。这个博客是我大学三年做的最有技术性，唯一能拿得出手的了的东西了。虽然基本上是copy别人的东西，哈哈哈哈，不要笑话我。</p>
-								<p>奉上一句自己最喜欢的话：人的一切痛苦，是对自己无能的愤怒.</p>
-								<div class="height-40px"></div>
-								<h2 class="title text-center">Social</h2>
-								<ul class="social">
-									<li class="facebook"><a href="https://github.com/yyfxm"><span class="ion-social-github"></span></a></li>
-									<li class="twitter"><a href="#"><span class="ion-email"></span></a></li>
-									<li class="google-plus"><a href="#"><span class="ion-social-googleplus"></span></a></li>
-									<li class="tumblr"><a href="#"><span class="ion-social-tumblr"></span></a></li>
-								</ul>
+								<p>{{ post.excerpt }}</p>
+								<div class="read-more cl-effect-14">
+									<a href="{{ post.get_absolute_url }}" class="more-link">继续阅读<span class="meta-nav">→</span></a>
+								</div>
 							</div>
 						</article>
+					{% empty %}
+						<div class="no-post">no articles!</div>
+					{% endfor %}
 					</main>
 				</div>
 			</div>
@@ -91,7 +100,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p class="copyright">&copy陕ICP备18002843</p>
+						<p class="copyright">&copy; 陕ICP备18002843</p>
 					</div>
 				</div>
 			</div>
@@ -102,15 +111,15 @@
 			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
 			<nav>
 				<ul>
-					<li><a href="index.html">主页</a></li>
-					<li><a href="full-width.html">博客</a></li>
-					<li><a href="about.html">关于</a></li>
-					<li><a href="contact.html">联系</a></li>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="full-width.html">Blog</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="contact.html">Contact</a></li>
 				</ul>
 			</nav>
 		</div>
 
 		<script src="{% static 'blog/js/script.js' %}"></script>
-		
+
 	</body>
 </html>

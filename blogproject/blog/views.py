@@ -1,3 +1,4 @@
+from markdown.extensions.toc import TocExtension
 from django.core.paginator import Paginator
 from django.shortcuts import render,get_object_or_404
 from .models import Post,Category,Tag
@@ -92,7 +93,10 @@ class CategoryView(IndexView):
     def get_queryset(self):
         cate = get_object_or_404(Category,pk=self.kwargs.get('pk'))
         return super(CategoryView,self).get_queryset().filter(category=cate)
-
+class AllpostsView(ListView):
+    model = Post
+    template_name = 'blog/allposts.html'
+    context_object_name = 'post_list'
 class ArchivesView(IndexView):
     def get_querset(self):
         year = self.kwargs.get('year')
@@ -110,12 +114,13 @@ class PostDetailView(DetailView):
         return response
     def get_object(self,queryset=None):
         post = super(PostDetailView,self).get_object(queryset=None)
-        post.body = markdown.markdown(post.body,
-                                      extensions=[
-                                          'markdown.extensions.extra',
-                                          'markdown.extensions.codehilite',
-                                          'markdown.extensions.toc',
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            TocExtension(slugify=slugify),
                                       ])
+        post.body = md.convert(post.body)
+        post.toc = md.toc
         return post
     def get_context_data(self,**kwargs):
         context = super(PostDetailView,self).get_context_data(**kwargs)
@@ -136,3 +141,7 @@ class TagView(ListView):
         return super(TagView,self).get_queryset().filter(tags=tag)
 def about(request):
     return render(request,'blog/about.html')
+def contact(request):
+    return render(request,'blog/contact.html')
+
+
