@@ -1,6 +1,6 @@
 chardet==2.3.0
 command-not-found==0.3
-Django==1.11.4
+Django==1.11.23
 language-selector==0.1
 Markdown==2.6.11
 pycurl==7.43.0
